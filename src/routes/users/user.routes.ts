@@ -1,9 +1,9 @@
 import { Router, Request, Response } from 'express';
+import { registerController, loginController } from './user.controller';
 
 const router = Router();
 
-router.get('/', (request: Request, response: Response) => {
-  response.send('servidor de combeneficios en typescript');
-});
+router.post('/register', registerController);
+router.post('/login', loginController);
 
 module.exports = router;

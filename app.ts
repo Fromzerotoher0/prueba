@@ -5,8 +5,12 @@ import routes from './src/routes/routes';
 import * as dotenv from 'dotenv';
 import ErrorHandler from './src/helpers/errorHandler';
 import HttpException from './src/helpers/httpException';
+import connection from './src/config/database';
 
 const app = express();
+
+//connection to the database
+connection;
 
 // To handle the cors
 app.use(cors());
@@ -18,8 +22,12 @@ app.use(express.urlencoded({ extended: true }));
 app.use(morgan('dev'));
 // Environment variables
 dotenv.config({ path: './src/env/.env' });
-
+//template engine
+app.set('view engine', 'ejs');
+//route for the multer's file uploads
+app.use('/public', express.static(`${__dirname}/storage`));
 // Api routes
+
 app.use('/api', routes);
 
 // Wrong routes handler
