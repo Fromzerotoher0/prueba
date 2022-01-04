@@ -8,6 +8,8 @@ export const createController = async (
 ): Promise<Response> => {
   try {
     const nombre = request.body.nombre;
+    console.log(nombre);
+
     const result = await create(nombre);
     return response.status(200).json({
       result,

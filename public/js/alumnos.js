@@ -59,7 +59,7 @@ function tabla(data) {
         <td>${dato.fechaNacimiento}</td>
         <td>${dato.nombre_sede}</td>
         <td><img style="height:100px;width:150px" src=${dato.foto}></td>
-        <td><button type="button" class="btn btn-primary">editar</button>
+        <td><button type="button" class="btn btn-primary">ver</button>
         <button type="button" onclick="eliminar(${dato.id})" class="btn btn-danger">eliminar</button></td>
       </tr>
     `;
@@ -120,6 +120,7 @@ function eliminar(id) {
         alert(res.message);
       } else {
         alert('alumno eliminado');
+        location.reload();
       }
     });
 }

@@ -34,8 +34,20 @@ app.get('/register', function (req, res) {
 app.get('/dashboard', function (req, res) {
   res.render('dashboard');
 });
-app.get('/sedes', function (req, res) {
-  res.render('sedes');
+app.get('/alumnos', function (req, res) {
+  res.render('alumnos');
+});
+app.get('/crearAlumno', function (req, res) {
+  res.render('crearAlumno');
+});
+app.get('/alumno', function (req, res) {
+  res.render('crearAlumno', { id: req.body.id });
+});
+app.get('/sede', function (req, res) {
+  res.render('sede');
+});
+app.get('/crearSede', function (req, res) {
+  res.render('crearSede');
 });
 //route for the multer's file uploads
 app.use('/public', express.static(`${__dirname}/public`));

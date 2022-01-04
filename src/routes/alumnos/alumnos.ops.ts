@@ -7,25 +7,34 @@ export function create(
   sexo: string,
   fechaNacimiento: string,
   foto: string,
-  sede: number
+  sede: string
 ) {
   return new Promise((resolve, reject) => {
+    console.log(fechaNacimiento);
+    console.log(sede);
     connection.query(
-      'insert into alumno set ?',
-      {
-        nombre: nombre,
-        apellido: apellido,
-        sexo: sexo,
-        fechaNacimiento: fechaNacimiento,
-        foto: foto,
-        sede_id: sede,
-      },
-      (error: any, results: any) => {
-        if (error == null) {
-          resolve('alumno creado');
-        } else {
-          reject(new HttpException(error, 400));
-        }
+      'select id_sede from sede where nombre_sede = ?',
+      [sede],
+      (error, results) => {
+        let id = results[0].id_sede;
+        connection.query(
+          'insert into alumno set ?',
+          {
+            nombre: nombre,
+            apellido: apellido,
+            sexo: sexo,
+            fechaNacimiento: fechaNacimiento,
+            foto: foto,
+            sede_id: id,
+          },
+          (error: any, results: any) => {
+            if (error == null) {
+              resolve('alumno creado');
+            } else {
+              reject(new HttpException(error, 400));
+            }
+          }
+        );
       }
     );
   });
