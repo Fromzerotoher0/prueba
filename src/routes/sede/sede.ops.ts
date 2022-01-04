@@ -103,7 +103,7 @@ export function edit(id: number, nombre: string) {
       (error, results) => {
         if (results.length > 0) {
           connection.query(
-            `update sede set nombre = "${nombre}"  where id = ${id}`,
+            `update sede set nombre_sede = "${nombre}"  where id_sede = ${id}`,
             (error: any, results) => {
               if (error) {
                 reject(new HttpException(error, 400));
