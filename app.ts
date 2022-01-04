@@ -31,7 +31,7 @@ app.get('/register', function (req, res) {
   res.render('register');
 });
 //route for the multer's file uploads
-app.use('/public', express.static(`${__dirname}/storage`));
+app.use('/public', express.static(`${__dirname}/public`));
 // Api routes
 
 app.use('/api', routes);

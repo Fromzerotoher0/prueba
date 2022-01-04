@@ -8,7 +8,7 @@ export const registerController = async (
 ): Promise<Response> => {
   try {
     const user = request.body.user;
-    const password = request.body.password;
+    const password = request.body.pass;
     const result = await register(user, password);
     return response.status(200).json({
       result,

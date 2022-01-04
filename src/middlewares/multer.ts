@@ -8,7 +8,7 @@ const multerConfig = multer.diskStorage({
   destination: (request: Request, file: Express.Multer.File, callback) => {
     let dirName = request.body.directorio;
     console.log(dirName);
-    const directory = `storage/${dirName}`;
+    const directory = `public/${dirName}`;
     // create the directory if doesn't exist
     if (!fs.existsSync(directory)) {
       fs.mkdirSync(directory, { recursive: true });
