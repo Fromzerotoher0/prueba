@@ -59,7 +59,7 @@ function tabla(data) {
         <td>${dato.fechaNacimiento}</td>
         <td>${dato.nombre_sede}</td>
         <td><img style="height:100px;width:150px" src=${dato.foto}></td>
-        <td><button type="button" class="btn btn-primary">ver</button>
+        <td><button type="button" onclick="perfil(${dato.id})" class="btn btn-primary">ver</button>
         <button type="button" onclick="eliminar(${dato.id})" class="btn btn-danger">eliminar</button></td>
       </tr>
     `;
@@ -123,4 +123,8 @@ function eliminar(id) {
         location.reload();
       }
     });
+}
+
+function perfil(id) {
+  location.href = `http://localhost:7000/perfil/${id}`;
 }

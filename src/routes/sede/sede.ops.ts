@@ -46,6 +46,22 @@ export function read() {
   });
 }
 
+export function readById(id: number) {
+  return new Promise((resolve, reject) => {
+    connection.query(
+      `select * from sede where id_sede = ?`,
+      [id],
+      (error: any, results) => {
+        if (error) {
+          reject(new HttpException(error, 400));
+        } else {
+          resolve(results);
+        }
+      }
+    );
+  });
+}
+
 export function remove(id: number) {
   return new Promise((resolve, reject) => {
     connection.query(

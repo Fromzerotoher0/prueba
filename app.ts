@@ -43,6 +43,9 @@ app.get('/crearAlumno', function (req, res) {
 app.get('/perfil/:id', function (req, res) {
   res.render('alumno');
 });
+app.get('/sede/:id', function (req, res) {
+  res.render('informacionSede');
+});
 app.get('/sede', function (req, res) {
   res.render('sede');
 });

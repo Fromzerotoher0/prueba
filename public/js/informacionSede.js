@@ -1,10 +1,10 @@
-function cargarAlumno() {
+function cargarSede() {
   let url = document.URL;
   let id = url.substring(url.lastIndexOf('/') + 1);
   const data = {
     id: id,
   };
-  fetch('http://localhost:7000/api/alumnos/readById', {
+  fetch('http://localhost:7000/api/sede/readById', {
     method: 'post',
     headers: {
       Accept: 'application/json, text/plain, */*',
@@ -18,7 +18,7 @@ function cargarAlumno() {
         alert(res.message);
       } else {
         if (res.result.length == 0) {
-          alert('usuario inexistente');
+          alert('sede inexistente');
           location.href = 'http://localhost:7000/dashboard';
         } else {
           console.log(res.result);
@@ -27,4 +27,4 @@ function cargarAlumno() {
     });
 }
 
-cargarAlumno();
+cargarSede();
