@@ -60,7 +60,7 @@ function tabla(data) {
         <td>${dato.nombre_sede}</td>
         <td><img style="height:100px;width:150px" src=${dato.foto}></td>
         <td><button type="button" class="btn btn-primary">editar</button>
-        <button type="button" class="btn btn-danger">eliminar</button></td>
+        <button type="button" onclick="eliminar(${dato.id})" class="btn btn-danger">eliminar</button></td>
       </tr>
     `;
   }
@@ -97,6 +97,29 @@ function filter() {
       } else {
         console.log(res.result);
         tabla(res.result);
+      }
+    });
+}
+
+//eliminar un alumno
+function eliminar(id) {
+  const data = {
+    id: id,
+  };
+  fetch('http://localhost:7000/api/alumnos/remove', {
+    method: 'delete',
+    headers: {
+      Accept: 'application/json, text/plain, */*',
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data),
+  })
+    .then((res) => res.json())
+    .then((res) => {
+      if (res.status == 400) {
+        alert(res.message);
+      } else {
+        alert('alumno eliminado');
       }
     });
 }

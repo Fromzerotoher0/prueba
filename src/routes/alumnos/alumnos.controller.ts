@@ -69,6 +69,8 @@ export const removeController = async (
 ): Promise<Response> => {
   try {
     const id = request.body.id;
+    console.log(id);
+
     const result = await remove(id);
     return response.status(200).json({
       result,

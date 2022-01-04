@@ -34,7 +34,7 @@ export function create(
 export function read() {
   return new Promise((resolve, reject) => {
     connection.query(
-      'select * from alumno a INNER JOIN sede s on s.id = a.sede_id',
+      'select * from alumno a INNER JOIN sede s on s.id_sede = a.sede_id',
       (error: any, results) => {
         if (error) {
           reject(new HttpException(error, 400));
@@ -48,26 +48,39 @@ export function read() {
 
 export function readBySede(sede: any) {
   return new Promise((resolve, reject) => {
-    connection.query(
-      'select id from sede where nombre_sede = ?',
-      [sede],
-      (error, results) => {
-        let id = results[0].id;
-        connection.query(
-          `select * from alumno a
-          inner join sede s on s.id = a.sede_id
-          where a.sede_id = ?`,
-          [id],
-          (error: any, results) => {
-            if (error) {
-              reject(new HttpException(error, 400));
-            } else {
-              resolve(results);
-            }
+    if (sede == 'todas las sedes') {
+      connection.query(
+        'select * from alumno a INNER JOIN sede s on s.id_sede = a.sede_id',
+        (error: any, results) => {
+          if (error) {
+            reject(new HttpException(error, 400));
+          } else {
+            resolve(results);
           }
-        );
-      }
-    );
+        }
+      );
+    } else {
+      connection.query(
+        'select id_sede from sede where nombre_sede = ?',
+        [sede],
+        (error, results) => {
+          let id = results[0].id_sede;
+          connection.query(
+            `select * from alumno a
+          inner join sede s on s.id_sede = a.sede_id
+          where a.sede_id = ?`,
+            [id],
+            (error: any, results) => {
+              if (error) {
+                reject(new HttpException(error, 400));
+              } else {
+                resolve(results);
+              }
+            }
+          );
+        }
+      );
+    }
   });
 }
 
