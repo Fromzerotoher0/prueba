@@ -33,27 +33,39 @@ export function create(
 
 export function read() {
   return new Promise((resolve, reject) => {
-    connection.query('select * from alumno', (error: any, results) => {
-      if (error) {
-        reject(new HttpException(error, 400));
-      } else {
-        resolve(results);
-      }
-    });
-  });
-}
-
-export function readBySede(sede: any) {
-  return new Promise((resolve, reject) => {
     connection.query(
-      'select * from alumno where sede_id = ?',
-      [sede],
+      'select * from alumno a INNER JOIN sede s on s.id = a.sede_id',
       (error: any, results) => {
         if (error) {
           reject(new HttpException(error, 400));
         } else {
           resolve(results);
         }
+      }
+    );
+  });
+}
+
+export function readBySede(sede: any) {
+  return new Promise((resolve, reject) => {
+    connection.query(
+      'select id from sede where nombre_sede = ?',
+      [sede],
+      (error, results) => {
+        let id = results[0].id;
+        connection.query(
+          `select * from alumno a
+          inner join sede s on s.id = a.sede_id
+          where a.sede_id = ?`,
+          [id],
+          (error: any, results) => {
+            if (error) {
+              reject(new HttpException(error, 400));
+            } else {
+              resolve(results);
+            }
+          }
+        );
       }
     );
   });

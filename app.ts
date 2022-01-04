@@ -24,11 +24,18 @@ app.use(morgan('dev'));
 dotenv.config({ path: './src/env/.env' });
 //template engine
 app.set('view engine', 'ejs');
+//frontend routes
 app.get('/', function (req, res) {
   res.render('index');
 });
 app.get('/register', function (req, res) {
   res.render('register');
+});
+app.get('/dashboard', function (req, res) {
+  res.render('dashboard');
+});
+app.get('/sedes', function (req, res) {
+  res.render('sedes');
 });
 //route for the multer's file uploads
 app.use('/public', express.static(`${__dirname}/public`));

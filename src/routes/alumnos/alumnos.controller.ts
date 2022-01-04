@@ -51,6 +51,8 @@ export const readBySedeController = async (
 ): Promise<Response> => {
   try {
     const sede = request.body.sede;
+    console.log(sede);
+
     const result = await readBySede(sede);
     return response.status(200).json({
       result,

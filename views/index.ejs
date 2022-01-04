@@ -20,7 +20,7 @@
   </head>
   <body class="text-center">
     <main class="form-signin text-center shadow-lg p-3 mb-5">
-      <form id="formLogin" action="/api/users/login" method="POST">
+      <form>
         <img
           class="mb-4"
           src="public/images/icon.png"
@@ -48,7 +48,7 @@
           />
           <label for="password">Password</label>
         </div>
-        <button class="w-100 btn btn-lg btn-primary" type="submit">
+        <button id="login" class="w-100 btn btn-lg btn-primary" type="button">
           Login
         </button>
       </form>
@@ -58,5 +58,6 @@
         >Registrarse</a
       >
     </main>
+    <script src="public/js/login.js"></script>
   </body>
 </html>

@@ -37,25 +37,30 @@
           <div class="card border-primary">
             <div class="card-header bg-primary text-white">Registrarse</div>
             <div class="card-body text-primary">
-              <form action="/api/users/register" method="POST">        
-                <div class="mb-3">
-                    <label for="user" class="form-label">Usuario</label>
-                    <input id="user" name="user" type="text" class="form-control">
-                </div>
-                <div class="mb-3">
-                    <label for="pass" class="form-label">Contraseña</label>
-                    <input id="pass" name="pass" type="password" class="form-control">
-                </div>                            
+            <form>
+
+              <div class="mb-3">
+                <label for="user" class="form-label">Usuario</label>
+                <input id="user" name="user" type="text" class="form-control">
             </div>
-            <div class="card-footer bg-transparent border-primary">
-              <a href="/" type="button" class="btn btn-secondary">Cancelar</a>
-              <button type="submit" class="btn btn-primary">Registrar</button>
-            </div>
+            <div class="mb-3">
+                <label for="pass" class="form-label">Contraseña</label>
+                <input id="pass" name="pass" type="password" class="form-control">
+            </div>                            
+        </div>
+        <div class="card-footer bg-transparent border-primary">
+          <a href="/" type="button" class="btn btn-secondary">Cancelar</a>
+          <button type="button"  id="register" class="btn btn-primary">Registrar</button>
+        </div>
             </form>
+
+            
           </div>   
     
         </div>
     </div>
 </div>
+<script src="public/js/register.js"></script>
+
   </body>
 </html>
