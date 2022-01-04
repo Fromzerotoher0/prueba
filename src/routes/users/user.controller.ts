@@ -19,18 +19,18 @@ export const registerController = async (
 };
 
 export const loginController = async (
-    request: Request,
-    response: Response,
-    next: any
-  ): Promise<Response> => {
-    try {
-      const user = request.body.user;
-      const password = request.body.password;
-      const result = await login(user, password);
-      return response.status(200).json({
-        result,
-      });
-    } catch (error) {
-      return next(error);
-    }
-  };
+  request: Request,
+  response: Response,
+  next: any
+): Promise<Response> => {
+  try {
+    const user = request.body.user;
+    const password = request.body.pass;
+    const result = await login(user, password);
+    return response.status(200).json({
+      result,
+    });
+  } catch (error) {
+    return next(error);
+  }
+};
