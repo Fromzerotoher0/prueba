@@ -40,8 +40,8 @@ app.get('/alumnos', function (req, res) {
 app.get('/crearAlumno', function (req, res) {
   res.render('crearAlumno');
 });
-app.get('/alumno', function (req, res) {
-  res.render('crearAlumno', { id: req.body.id });
+app.get('/perfil/:id', function (req, res) {
+  res.render('alumno');
 });
 app.get('/sede', function (req, res) {
   res.render('sede');
