@@ -55,6 +55,22 @@ export function read() {
   });
 }
 
+export function readById(id: number) {
+  return new Promise((resolve, reject) => {
+    connection.query(
+      'select * from alumno where id = ?',
+      [id],
+      (error: any, results) => {
+        if (error) {
+          reject(new HttpException(error, 400));
+        } else {
+          resolve(results);
+        }
+      }
+    );
+  });
+}
+
 export function readBySede(sede: any) {
   return new Promise((resolve, reject) => {
     if (sede == 'todas las sedes') {

@@ -1,5 +1,12 @@
 import { NextFunction, Request, Response } from 'express';
-import { create, remove, read, readBySede, edit } from './alumnos.ops';
+import {
+  create,
+  remove,
+  read,
+  readById,
+  readBySede,
+  edit,
+} from './alumnos.ops';
 
 export const createController = async (
   request: Request,
@@ -36,6 +43,22 @@ export const readController = async (
 ): Promise<Response> => {
   try {
     const result = await read();
+    return response.status(200).json({
+      result,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const readByIdController = async (
+  request: Request,
+  response: Response,
+  next: any
+): Promise<Response> => {
+  try {
+    const id = request.body.id;
+    const result = await readById(id);
     return response.status(200).json({
       result,
     });
