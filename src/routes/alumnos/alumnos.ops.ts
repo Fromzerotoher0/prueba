@@ -17,7 +17,7 @@ export function create(
         let alumnos = results[0].alumnos + 1;
         connection.query(
           'update sede set alumnos = ? where nombre_sede = ?',
-          [alumnos,sede],
+          [alumnos, sede],
           (error, results) => {
             connection.query(
               'select id_sede from sede where nombre_sede = ?',
@@ -123,14 +123,35 @@ export function readBySede(sede: any) {
 export function remove(id: number) {
   return new Promise((resolve, reject) => {
     connection.query(
-      'delete from alumno where id = ?',
+      'select sede_id from alumno where id = ?',
       [id],
-      (error: any, results) => {
-        if (error) {
-          reject(new HttpException(error, 400));
-        } else {
-          resolve('usuario eliminado');
-        }
+      (error, results) => {
+        let sede = results[0].sede_id;
+        connection.query(
+          'select alumnos from sede where id_sede = ?',
+          [sede],
+          (error, results) => {
+            let alumnos = results[0].alumnos - 1;
+            console.log(sede);
+            console.log(alumnos);
+            connection.query(
+              `update sede set alumnos = ? where id_sede = ?`,[alumnos,sede],
+              (error, results) => {
+                connection.query(
+                  'delete from alumno where id = ?',
+                  [id],
+                  (error: any, results) => {
+                    if (error) {
+                      reject(new HttpException(error, 400));
+                    } else {
+                      resolve('usuario eliminado');
+                    }
+                  }
+                );
+              }
+            );
+          }
+        );
       }
     );
   });

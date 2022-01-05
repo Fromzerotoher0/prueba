@@ -67,7 +67,7 @@ function registrar() {
       } else {
         console.log(res);
         alert('alumno registrado');
-        location.href = 'http://localhost:7000/sede';
+        location.href = 'http://localhost:7000/alumnos';
       }
     });
 }
