@@ -18,7 +18,7 @@ export const createController = async (
     const apellido = request.body.apellido;
     const sexo = request.body.sexo;
     const fechaNacimiento = request.body.fechaNacimiento;
-    const foto = `http://localhost:7000/public/users/${request.file.filename}`;
+    const foto = `http://localhost:7000/public/foto/${request.file.filename}`;
     const sede = request.body.sede;
     const result = await create(
       nombre,

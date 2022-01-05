@@ -38,7 +38,7 @@ app.get('/alumnos', function (req, res) {
   res.render('alumnos');
 });
 app.get('/crearAlumno', function (req, res) {
-  res.render('crearAlumno');
+  res.render('crear');
 });
 app.get('/perfil/:id', function (req, res) {
   res.render('alumno');

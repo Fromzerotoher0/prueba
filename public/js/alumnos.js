@@ -128,3 +128,17 @@ function eliminar(id) {
 function perfil(id) {
   location.href = `http://localhost:7000/perfil/${id}`;
 }
+
+function printData()
+{
+   var divToPrint=document.getElementById("print");
+   newWin= window.open("");
+   newWin.document.write(divToPrint.outerHTML);
+   newWin.print();
+   newWin.close();
+}
+
+const imprimir = document.getElementById('imprimir');
+imprimir.addEventListener('click',()=>{
+  printData();
+})

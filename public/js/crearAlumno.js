@@ -45,7 +45,7 @@ function registrar() {
   const sede = document.getElementById('sedes');
   let photo = document.getElementById('image').files[0];
   let formData = new FormData();
-  formData.append('directorio', 'users');
+  formData.append('directorio', 'foto');
   formData.append('nombre', nombre.value);
   formData.append('apellido', apellido.value);
   formData.append('sexo', gender.value);

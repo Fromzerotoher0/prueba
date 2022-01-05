@@ -10,29 +10,40 @@ export function create(
   sede: string
 ) {
   return new Promise((resolve, reject) => {
-    console.log(fechaNacimiento);
-    console.log(sede);
     connection.query(
-      'select id_sede from sede where nombre_sede = ?',
+      'select alumnos from sede where nombre_sede = ?',
       [sede],
       (error, results) => {
-        let id = results[0].id_sede;
+        let alumnos = results[0].alumnos + 1;
         connection.query(
-          'insert into alumno set ?',
-          {
-            nombre: nombre,
-            apellido: apellido,
-            sexo: sexo,
-            fechaNacimiento: fechaNacimiento,
-            foto: foto,
-            sede_id: id,
-          },
-          (error: any, results: any) => {
-            if (error == null) {
-              resolve('alumno creado');
-            } else {
-              reject(new HttpException(error, 400));
-            }
+          'update sede set alumnos = ? where nombre_sede = ?',
+          [alumnos,sede],
+          (error, results) => {
+            connection.query(
+              'select id_sede from sede where nombre_sede = ?',
+              [sede],
+              (error, results) => {
+                let id = results[0].id_sede;
+                connection.query(
+                  'insert into alumno set ?',
+                  {
+                    nombre: nombre,
+                    apellido: apellido,
+                    sexo: sexo,
+                    fechaNacimiento: fechaNacimiento,
+                    foto: foto,
+                    sede_id: id,
+                  },
+                  (error: any, results: any) => {
+                    if (error == null) {
+                      resolve('alumno creado');
+                    } else {
+                      reject(new HttpException(error, 400));
+                    }
+                  }
+                );
+              }
+            );
           }
         );
       }
